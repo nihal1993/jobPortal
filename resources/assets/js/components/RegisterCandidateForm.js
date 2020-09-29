@@ -146,7 +146,7 @@ import  { Redirect } from 'react-router-dom'
 	            </div>
 	          </div>
 	          <div className="form-group ">
-	            <h4><label for="Contact">Contact</label></h4>
+	            <h4><label for="Skills">Skills</label></h4>
 	            <input type="text"  onChange={handleChange}
 	             onBlur={handleBlur} name="skills" className="form-control form-control-lg"   />
 	             <div class="invalid-feedback">

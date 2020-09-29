@@ -66,9 +66,9 @@ class  Navbar extends Component {
                                 <div className="main-menu">
                                     <nav className="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><Link to={'/Job'} >Post Job</Link></li>     
-                                            
-                                             
+                                            <li><Link to={'/Job'} >Post Job</Link></li>
+                                             <li><Link to={'/PostedJobs'} >View 
+                                             Posted Jobs </Link></li> 
                                         </ul>
                                     </nav>
                                 </div>

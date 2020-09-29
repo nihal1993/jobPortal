@@ -12812,8 +12812,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_LoginCandidate__ = __webpack_require__(261);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Dashboard__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_DashboardStudent__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Job__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Job___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Job__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_PostedJobs__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_PostedJobs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_PostedJobs__);
 
 __webpack_require__(104);
+
+
 
 
 
@@ -12842,7 +12848,9 @@ function App() {
                 } }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/DashboardStudent', render: function render(props) {
                     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_DashboardStudent__["a" /* default */], props);
-                } })
+                } }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/Job', component: __WEBPACK_IMPORTED_MODULE_10__components_Job___default.a, exact: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/PostedJobs', component: __WEBPACK_IMPORTED_MODULE_11__components_PostedJobs___default.a, exact: true })
         )
     );
 }
@@ -63647,8 +63655,8 @@ var RegisterCandidateForm = function (_Component) {
 																																																																																																																					null,
 																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 																																																																																																																																		'label',
-																																																																																																																																		{ 'for': 'Contact' },
-																																																																																																																																		'Contact'
+																																																																																																																																		{ 'for': 'Skills' },
+																																																																																																																																		'Skills'
 																																																																																																																					)
 																																																																																																								),
 																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
@@ -63755,7 +63763,7 @@ var Dashboard = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 
-        console.log(_this.props.location); //undefined
+        console.log(_this.props.location.state.userdata[0].name); //undefined
         return _this;
     }
 
@@ -63791,8 +63799,8 @@ var Dashboard = function (_Component) {
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'h1',
                                                 null,
-                                                'Find the most exciting jobs',
-                                                this.props.location.state.userdata.name
+                                                this.props.location.state.userdata[0].name,
+                                                ' .. Post a job here'
                                             )
                                         )
                                     ),
@@ -63954,6 +63962,15 @@ var Navbar = function (_Component) {
                                                                 { to: '/Job' },
                                                                 'Post Job'
                                                             )
+                                                        ),
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                            'li',
+                                                            null,
+                                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                                                                { to: '/PostedJobs' },
+                                                                'View Posted Jobs '
+                                                            )
                                                         )
                                                     )
                                                 )
@@ -64085,6 +64102,18 @@ var DashboardStudent = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (DashboardStudent);
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports) {
+
+
 
 /***/ })
 /******/ ]);
