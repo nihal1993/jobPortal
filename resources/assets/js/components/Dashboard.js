@@ -12,26 +12,33 @@ class  Dashboard extends Component {
         this.state = {
          status:false,
         }
-       
+       console.log(this.props.location.state);
         this.postJob = this.postJob.bind(this);
     }
     
      postJob() {
-         return <Redirect 
+         this.setState({ status: true});
+     }
+
+      renderElement(){
+       if(this.state.status){
+          return  <Redirect 
             to={{
             pathname: '/Job',
             state: { id: this.props.location.state.userdata[0].id}
          }} 
-
          />;
-
-     }
+     }else{
+             return null;
+         }
+    }
 
     render() {
 
         return (
 
        <div>
+        <div>{ this.renderElement() }</div>
         <Navbar  />  
         <div className="slider-area " >
                 <div className="slider-active">

@@ -14535,9 +14535,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Main__ = __webpack_require__(238);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Company__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Candidate__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Dashboard__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_LoginCompanyDashboard__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_LoginCandidate__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Dashboard__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Job__ = __webpack_require__(257);
 
 __webpack_require__(109);
+
+
 
 
 
@@ -14557,11 +14562,13 @@ function App() {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/', component: __WEBPACK_IMPORTED_MODULE_3__components_Main__["a" /* default */], exact: true }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/registerCompany', component: __WEBPACK_IMPORTED_MODULE_4__components_Company__["a" /* default */], exact: true }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/registerCandidate', component: __WEBPACK_IMPORTED_MODULE_5__components_Candidate__["a" /* default */], exact: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/LoginCompany', component: __WEBPACK_IMPORTED_MODULE_6__components_LoginCompanyDashboard__["a" /* default */], exact: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/LoginCandidate', component: __WEBPACK_IMPORTED_MODULE_7__components_LoginCandidate__["a" /* default */], exact: true }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/Dashboard', render: function render(props) {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Dashboard__["a" /* default */], props);
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__components_Dashboard__["a" /* default */], props);
                 } }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/Job', render: function render(props) {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Job, props);
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Job__["a" /* default */], props);
                 } })
         )
     );
@@ -63487,8 +63494,383 @@ var RegisterCandidateForm = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (RegisterCandidateForm);
 
 /***/ }),
-/* 253 */,
-/* 254 */,
+/* 253 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_formik__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_flash_message__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_flash_message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_flash_message__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(13);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var LoginCompany = function (_Component) {
+  _inherits(LoginCompany, _Component);
+
+  function LoginCompany() {
+    _classCallCheck(this, LoginCompany);
+
+    //Initialize the state in the constructor
+    var _this = _possibleConstructorReturn(this, (LoginCompany.__proto__ || Object.getPrototypeOf(LoginCompany)).call(this));
+
+    _this.state = {
+      userData: [],
+      status: false
+    };
+    console.log(_this.state.status);
+    return _this;
+  }
+
+  _createClass(LoginCompany, [{
+    key: 'renderElement',
+    value: function renderElement() {
+
+      if (this.state.userData.status) {
+        localStorage.setItem('itemName', this.state.userData.token);
+        return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], {
+          to: {
+            pathname: '/Dashboard',
+            state: { userdata: this.state.userData.user }
+          } });
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'div',
+          null,
+          this.renderElement()
+        ),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_0_formik__["a" /* Formik */],
+          {
+            initialValues: { email: '', password: '' },
+            validate: function validate(values) {
+              var errors = {};
+              if (!values.email) {
+                errors.email = 'Email is required';
+              } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+              }
+
+              if (!values.password) {
+                errors.password = 'password is required';
+              } else if (/^[A-Za-z]\w{7,14}$/.test(values.password)) {
+                errors.password = ' 6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter';
+              }
+
+              return errors;
+            },
+            onSubmit: function onSubmit(values, _ref) {
+              var setSubmitting = _ref.setSubmitting;
+
+              setTimeout(function () {
+                _this2.setState({ status: false });
+                fetch(window.location.origin + "/api/login", {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(values)
+                }).then(function (response) {
+                  return response.json();
+                }).then(function (data) {
+                  console.log(data);
+                  _this2.setState({ userData: data });
+                  _this2.setState({ status: !_this2.state.userData.status });
+                });
+
+                setSubmitting(false);
+              }, 400);
+            }
+          },
+          function (_ref2) {
+            var values = _ref2.values,
+                errors = _ref2.errors,
+                touched = _ref2.touched,
+                handleChange = _ref2.handleChange,
+                handleBlur = _ref2.handleBlur,
+                handleSubmit = _ref2.handleSubmit,
+                isSubmitting = _ref2.isSubmitting;
+            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'form',
+              { onSubmit: handleSubmit },
+              _this2.state.status && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_2_react_flash_message___default.a,
+                  { duration: 5000 },
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'strong',
+                    null,
+                    _this2.state.userData.message
+                  )
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group ' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'h4',
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'label',
+                    { 'for': 'exampleInputEmail1' },
+                    'Email address'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'email', onChange: handleChange,
+                  onBlur: handleBlur, name: 'email', className: 'form-control form-control-lg', id: 'exampleInputEmail1', 'aria-describedby': 'emailHelp', placeholder: 'Enter email' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'small',
+                  { id: 'emailHelp', className: 'form-text text-muted' },
+                  'We\'ll never share your email with anyone else.'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group ' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'h4',
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'label',
+                    { 'for': 'exampleInputPassword1' },
+                    'Password'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'password', onChange: handleChange,
+                  onBlur: handleBlur, name: 'password', className: 'form-control form-control-lg', id: 'exampleInputPassword1', placeholder: 'Password' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.password && touched.password && errors.password
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', disabled: isSubmitting },
+                'Submit'
+              )
+            );
+          }
+        )
+      );
+    }
+  }]);
+
+  return LoginCompany;
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (LoginCompany);
+
+/***/ }),
+/* 254 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_formik__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var LoginCandidate = function (_Component) {
+  _inherits(LoginCandidate, _Component);
+
+  function LoginCandidate() {
+    _classCallCheck(this, LoginCandidate);
+
+    return _possibleConstructorReturn(this, (LoginCandidate.__proto__ || Object.getPrototypeOf(LoginCandidate)).apply(this, arguments));
+  }
+
+  _createClass(LoginCandidate, [{
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'h1',
+          null,
+          'Anywhere in your app!'
+        ),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_0_formik__["a" /* Formik */],
+          {
+            initialValues: { email: '', password: '' },
+            validate: function validate(values) {
+              var errors = {};
+              if (!values.email) {
+                errors.email = 'Required';
+              } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+              }
+              return errors;
+            },
+            onSubmit: function onSubmit(values, _ref) {
+              var setSubmitting = _ref.setSubmitting;
+
+              setTimeout(function () {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+            }
+          },
+          function (_ref2) {
+            var values = _ref2.values,
+                errors = _ref2.errors,
+                touched = _ref2.touched,
+                handleChange = _ref2.handleChange,
+                handleBlur = _ref2.handleBlur,
+                handleSubmit = _ref2.handleSubmit,
+                isSubmitting = _ref2.isSubmitting;
+            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'form',
+              { onSubmit: handleSubmit },
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'label',
+                  { 'for': 'Name' },
+                  'Company Name'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
+                  onBlur: handleBlur, name: 'name', className: 'form-control', placeholder: 'Enter Company Name ' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'label',
+                  { 'for': 'Location' },
+                  'Location'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
+                  onBlur: handleBlur, className: 'form-control', placeholder: 'Enter Location Name ' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'small',
+                  { id: 'location', name: 'location', className: 'form-text text-muted' },
+                  'eg. HouseNo/Street/Landmark/City/Country '
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'label',
+                  { 'for': 'Contact' },
+                  'Contact'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'number', onChange: handleChange,
+                  onBlur: handleBlur, name: 'contact', className: 'form-control', placeholder: '8821132431' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'label',
+                  { 'for': 'exampleInputEmail1' },
+                  'Email address'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'email', onChange: handleChange,
+                  onBlur: handleBlur, name: 'email', className: 'form-control', id: 'exampleInputEmail1', 'aria-describedby': 'emailHelp', placeholder: 'Enter email' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'small',
+                  { id: 'emailHelp', className: 'form-text text-muted' },
+                  'We\'ll never share your email with anyone else.'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                { className: 'form-group' },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'label',
+                  { 'for': 'exampleInputPassword1' },
+                  'Password'
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'password', onChange: handleChange,
+                  onBlur: handleBlur, name: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' }),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'div',
+                  { 'class': 'invalid-feedback' },
+                  errors.email && touched.email && errors.email
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', disabled: isSubmitting },
+                'Submit'
+              )
+            );
+          }
+        )
+      );
+    }
+  }]);
+
+  return LoginCandidate;
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (LoginCandidate);
+
+/***/ }),
 /* 255 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63526,7 +63908,7 @@ var Dashboard = function (_Component) {
         _this.state = {
             status: false
         };
-
+        console.log(_this.props.location.state);
         _this.postJob = _this.postJob.bind(_this);
         return _this;
     }
@@ -63534,13 +63916,21 @@ var Dashboard = function (_Component) {
     _createClass(Dashboard, [{
         key: 'postJob',
         value: function postJob() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Redirect */], {
-                to: {
-                    pathname: '/Job',
-                    state: { id: this.props.location.state.userdata[0].id }
-                }
-
-            });
+            this.setState({ status: true });
+        }
+    }, {
+        key: 'renderElement',
+        value: function renderElement() {
+            if (this.state.status) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Redirect */], {
+                    to: {
+                        pathname: '/Job',
+                        state: { id: this.props.location.state.userdata[0].id }
+                    }
+                });
+            } else {
+                return null;
+            }
         }
     }, {
         key: 'render',
@@ -63549,6 +63939,11 @@ var Dashboard = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    null,
+                    this.renderElement()
+                ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Navbar__["a" /* default */], null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -63644,12 +64039,405 @@ var Dashboard = function (_Component) {
 
 /***/ }),
 /* 256 */,
-/* 257 */,
+/* 257 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_formik__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(13);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var Job = function (_Component) {
+													_inherits(Job, _Component);
+
+													function Job() {
+																										_classCallCheck(this, Job);
+
+																										//Initialize the state in the constructor
+																										var _this = _possibleConstructorReturn(this, (Job.__proto__ || Object.getPrototypeOf(Job)).call(this));
+
+																										_this.state = {
+																																							userData: [],
+																																							status: false
+																										};
+																										console.log(_this.props.location.state);
+																										return _this;
+													}
+
+													_createClass(Job, [{
+																										key: 'renderElement',
+																										value: function renderElement() {
+																																							if (this.state.status) {
+																																																				return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Redirect */], {
+																																																																	to: {
+																																																																														pathname: '/DashboardStudent',
+																																																																														state: { userdata: this.state.userData }
+																																																																	} });
+																																							} else {
+																																																				return null;
+																																							}
+																										}
+													}, {
+																										key: 'render',
+																										value: function render() {
+																																							var _this2 = this;
+
+																																							return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																				'div',
+																																																				null,
+																																																				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																	'div',
+																																																																	null,
+																																																																	this.renderElement()
+																																																				),
+																																																				__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																	__WEBPACK_IMPORTED_MODULE_0_formik__["a" /* Formik */],
+																																																																	{
+																																																																														initialValues: { email: '', password: '', name: '', location: '', contact: '', skills: '' },
+																																																																														validate: function validate(values) {
+																																																																																											var errors = {};
+																																																																																											if (!values.email) {
+																																																																																																								errors.email = 'Email is required';
+																																																																																											} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+																																																																																																								errors.email = 'Invalid email address';
+																																																																																											}
+
+																																																																																											if (!values.name) {
+																																																																																																								errors.name = 'name is required';
+																																																																																											}
+
+																																																																																											if (!values.location) {
+																																																																																																								errors.location = 'location is required';
+																																																																																											} else if (!/^[a-z\d]+(?:\/[a-z\d]+)+$/i.test(values.location)) {
+																																																																																																								errors.location = 'location should be colony/name/city';
+																																																																																											}
+
+																																																																																											if (!values.skills) {
+																																																																																																								errors.skills = 'skills is required';
+																																																																																											} else if (!/^[a-z\d]+(?:\,[a-z\d]+)+$/i.test(values.location)) {
+																																																																																																								errors.skills = 'location should be c++,python,java';
+																																																																																											}
+
+																																																																																											if (!values.contact) {
+																																																																																																								errors.contact = 'contact is required';
+																																																																																											} else if (/^\d{10}$/.test(values.contact)) {
+																																																																																																								errors.contact = 'should be valid digit mobile no allowed';
+																																																																																											}
+
+																																																																																											if (!values.password) {
+																																																																																																								errors.password = 'password is required';
+																																																																																											} else if (/^[A-Za-z]\w{7,14}$/.test(values.password)) {
+																																																																																																								errors.password = ' 6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter';
+																																																																																											}
+
+																																																																																											return errors;
+																																																																														},
+																																																																														onSubmit: function onSubmit(values, _ref) {
+																																																																																											var setSubmitting = _ref.setSubmitting;
+
+																																																																																											setTimeout(function () {
+
+																																																																																																								fetch(window.location.origin + "/api/register", {
+																																																																																																																					method: 'POST',
+																																																																																																																					headers: {
+																																																																																																																																		'Content-Type': 'application/json'
+																																																																																																																					},
+																																																																																																																					body: JSON.stringify(values)
+																																																																																																								}).then(function (response) {
+																																																																																																																					return response.json();
+																																																																																																								}).then(function (data) {
+																																																																																																																					//Fetched product is stored in the state
+																																																																																																																					localStorage.setItem('itemName', data.token);
+																																																																																																																					_this2.setState({ userData: data.user });
+																																																																																																																					_this2.setState({ status: true });
+																																																																																																								});
+
+																																																																																																								setSubmitting(false);
+																																																																																											}, 400);
+																																																																														}
+																																																																	},
+																																																																	function (_ref2) {
+																																																																														var values = _ref2.values,
+																																																																														    errors = _ref2.errors,
+																																																																														    touched = _ref2.touched,
+																																																																														    handleChange = _ref2.handleChange,
+																																																																														    handleBlur = _ref2.handleBlur,
+																																																																														    handleSubmit = _ref2.handleSubmit,
+																																																																														    isSubmitting = _ref2.isSubmitting;
+																																																																														return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																											'form',
+																																																																																											{ onSubmit: handleSubmit },
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'Name' },
+																																																																																																																																		'Company Name'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, name: 'name', className: 'form-control form-control-lg', placeholder: 'Enter Company Name ' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.name && touched.name && errors.name
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'Location' },
+																																																																																																																																		'Location'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'location', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, className: 'form-control form-control-lg', placeholder: 'Enter Location Name ' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'small',
+																																																																																																																					{ id: 'location', className: 'form-text text-muted' },
+																																																																																																																					'eg. HouseNo/Street/Landmark/City/Country '
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.location && touched.location && errors.location
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'Contact' },
+																																																																																																																																		'Contact'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'number', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, name: 'contact', className: 'form-control form-control-lg', placeholder: '8821132431' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.contact && touched.contact && errors.contact
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'Skills' },
+																																																																																																																																		'Skills'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, name: 'skills', className: 'form-control form-control-lg' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.skills && touched.skills && errors.skills
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'exampleInputEmail1' },
+																																																																																																																																		'Email address'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'email', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, name: 'email', className: 'form-control form-control-lg', id: 'exampleInputEmail1', 'aria-describedby': 'emailHelp', placeholder: 'Enter email' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'small',
+																																																																																																																					{ id: 'emailHelp', className: 'form-text text-muted' },
+																																																																																																																					'We\'ll never share your email with anyone else.'
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.email && touched.email && errors.email
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'div',
+																																																																																																								{ className: 'form-group ' },
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'h4',
+																																																																																																																					null,
+																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																																		'label',
+																																																																																																																																		{ 'for': 'exampleInputPassword1' },
+																																																																																																																																		'Password'
+																																																																																																																					)
+																																																																																																								),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'password', onChange: handleChange,
+																																																																																																																					onBlur: handleBlur, name: 'password', className: 'form-control form-control-lg', id: 'exampleInputPassword1', placeholder: 'Password' }),
+																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																																					'div',
+																																																																																																																					{ 'class': 'invalid-feedback' },
+																																																																																																																					errors.password && touched.password && errors.password
+																																																																																																								)
+																																																																																											),
+																																																																																											__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+																																																																																																								'button',
+																																																																																																								{ type: 'submit', className: 'btn btn-primary', disabled: isSubmitting },
+																																																																																																								'Submit'
+																																																																																											)
+																																																																														);
+																																																																	}
+																																																				)
+																																							);
+																										}
+													}]);
+
+													return Job;
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Job);
+
+/***/ }),
 /* 258 */,
 /* 259 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports=function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=2)}([function(e,t,r){e.exports=r(3)()},function(e,t){e.exports=__webpack_require__(5)},function(e,t,r){"use strict";r.r(t);var n=r(1),o=r.n(n),i=r(0);function u(e){return(u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function c(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function s(e,t){return(s=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function a(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var r,n=p(e);if(t){var o=p(this).constructor;r=Reflect.construct(n,arguments,o)}else r=n.apply(this,arguments);return f(this,r)}}function f(e,t){return!t||"object"!==u(t)&&"function"!=typeof t?l(e):t}function l(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function p(e){return(p=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}var y=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&s(e,t)}(u,e);var t,r,n,i=a(u);function u(e){var t;return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,u),(t=i.call(this,e)).state={isVisible:!0},t.hide=t.hide.bind(l(t)),t.resumeTimer=t.resumeTimer.bind(l(t)),t.pauseTimer=t.pauseTimer.bind(l(t)),t}return t=u,(r=[{key:"componentDidMount",value:function(){var e=this.props.duration;this.remaining=e,this.resumeTimer()}},{key:"componentWillUnmount",value:function(){clearTimeout(this.timer)}},{key:"hide",value:function(){this.setState({isVisible:!1})}},{key:"resumeTimer",value:function(){window.clearTimeout(this.timer),this.start=new Date,this.timer=setTimeout(this.hide,this.remaining)}},{key:"pauseTimer",value:function(){this.props.persistOnHover&&(clearTimeout(this.timer),this.remaining-=new Date-this.start)}},{key:"render",value:function(){var e=this.state.isVisible,t=this.props.children;return e?o.a.createElement("div",{onMouseEnter:this.pauseTimer,onMouseLeave:this.resumeTimer},t):null}}])&&c(t.prototype,r),n&&c(t,n),u}(n.Component);y.defaultProps={duration:5e3,children:null,persistOnHover:!0},y.propTypes={children:i.node,duration:i.number,persistOnHover:i.bool},t.default=y},function(e,t,r){"use strict";var n=r(4);function o(){}function i(){}i.resetWarningCache=o,e.exports=function(){function e(e,t,r,o,i,u){if(u!==n){var c=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw c.name="Invariant Violation",c}}function t(){return e}e.isRequired=e;var r={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:t,element:e,elementType:e,instanceOf:t,node:e,objectOf:t,oneOf:t,oneOfType:t,shape:t,exact:t,checkPropTypes:i,resetWarningCache:o};return r.PropTypes=r,r}},function(e,t,r){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"}]);
+
+/***/ }),
+/* 271 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_formik__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LoginCompany__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Header__ = __webpack_require__(62);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var LoginCompanyDashboard = function (_Component) {
+    _inherits(LoginCompanyDashboard, _Component);
+
+    function LoginCompanyDashboard() {
+        _classCallCheck(this, LoginCompanyDashboard);
+
+        return _possibleConstructorReturn(this, (LoginCompanyDashboard.__proto__ || Object.getPrototypeOf(LoginCompanyDashboard)).apply(this, arguments));
+    }
+
+    _createClass(LoginCompanyDashboard, [{
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Header__["a" /* default */], null),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'div',
+                    { className: 'slider-area ' },
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                        'div',
+                        { className: 'slider-active' },
+                        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                            'div',
+                            { className: 'single-slider slider-height d-flex align-items-center' },
+                            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                'div',
+                                { className: 'container' },
+                                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                    'div',
+                                    { className: 'row' },
+                                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xl-6 col-lg-9 col-md-10' },
+                                        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                            'div',
+                                            { className: 'hero__caption' },
+                                            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                                'h1',
+                                                null,
+                                                'Recruters Login'
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xl-5 col-lg-9 col-md-10' },
+                                        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                                            'div',
+                                            { className: 'hero__caption' },
+                                            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__LoginCompany__["a" /* default */], null)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return LoginCompanyDashboard;
+}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (LoginCompanyDashboard);
 
 /***/ })
 /******/ ]);

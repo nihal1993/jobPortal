@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "formik": "^1.0.3",
+        "react-flash-message": "^1.0.4",
         "react-router-dom": "^5.2.0"
     }
 }

@@ -21,7 +21,7 @@ class Registration extends Model
 		if(isset($data['skills']) && $data['skills'] != null ){
 			$addUser = $this->addCandidate($data,$UserData->id);
 		}else{
-			$addUser = $this->addCompany($data,$UserData->id);
+			$addUser = $this->addCompany($data,$UserData->email);
 		}
 
 		$token = $UserData->createToken('Laravel Password Grant Client')->accessToken;
@@ -91,7 +91,7 @@ class Registration extends Model
 
 		$data = DB::table('users')
             ->join('companies', 'companies.user_id', '=', 'users.id')
-            ->where('users.id',$id)
+            ->where('users.email',$id)
             ->get();
 		
 		return $data->toarray();
