@@ -86,7 +86,7 @@ import  { Redirect } from 'react-router-dom'
             return response.json();
 		        })
 		        .then(data => {
-		            //Fetched product is stored in the state
+		            
 		            localStorage.setItem('itemName', data.token);
 		            this.setState({ userData: data.user });
 		            this.setState({ status: true});

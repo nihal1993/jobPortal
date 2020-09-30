@@ -30,7 +30,7 @@ class  Navbar extends Component {
                 })
                 .then(data => {
                     //Fetched product is stored in the state
-                    localStorage.setItem('itemName', 'null');
+                    localStorage.removeItem('itemName');
                     this.setState({ status: true});
                 });
      }
@@ -66,16 +66,15 @@ class  Navbar extends Component {
                                 <div className="main-menu">
                                     <nav className="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><Link to={'/Job'} >Post Job</Link></li>
+                                            
                                              <li><Link to={'/PostedJobs'} >View 
                                              Posted Jobs </Link></li> 
                                         </ul>
                                     </nav>
                                 </div>
-                                <div class="header-btn d-none f-right d-lg-block">
-                                    <button  style={{ background: 'black','color':'white',padding:'8px' }} onClick={this.logoutUser} >
-                                             Logout
-                                            </button>
+                                <div className="header-btn d-none f-right d-lg-block">
+                                    
+                                    <a href="#" onClick={this.logoutUser} className="btn post-btn">logout</a>        
                                     
                                 
                                 </div>         
