@@ -20,12 +20,14 @@ class Registration extends Model
         $UserData =  $this->addUser($data);
 		if(isset($data['skills']) && $data['skills'] != null ){
 			$addUser = $this->addCandidate($data,$UserData->id);
+			$insertedData = $this->getUserData($UserData->email,'candidate');
 		}else{
-			$addUser = $this->addCompany($data,$UserData->email);
+			$addUser = $this->addCompany($data,$UserData->id);
+			$insertedData = $this->getUserData($UserData->email,'company');
 		}
 
 		$token = $UserData->createToken('Laravel Password Grant Client')->accessToken;
-		return [$token,$UserData->id];
+		return [$token,$insertedData];
 	}
     
 
@@ -64,7 +66,7 @@ class Registration extends Model
 		}
 	}
 
-	public function addCandidate($data){
+	public function addCandidate($data,$userId){
 
 		$arrayInsert = array(
 			'user_id' => $userId,
@@ -87,13 +89,19 @@ class Registration extends Model
 		}
 	}
 
-	public function getUserData($id){
-
+	public function getUserData($mail,$attribute){
+ 
+ 		if($attribute == 'company'){
 		$data = DB::table('users')
             ->join('companies', 'companies.user_id', '=', 'users.id')
-            ->where('users.email',$id)
+            ->where('users.email',$mail)
             ->get();
-		
+		}else if($attribute == 'candidate'){
+			$data = DB::table('users')
+            ->join('candidates', 'candidates.user_id', '=', 'users.id')
+            ->where('users.email',$mail)
+            ->get();
+		}
 		return $data->toarray();
 	}
 

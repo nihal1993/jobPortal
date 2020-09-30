@@ -21,11 +21,10 @@ class ApiAuthController extends Controller
 	    $data = $request->all();  
 	       
         $token =  $this->register->register($data);
-        $data =   $this->register->getUserData($token[1]);
 	    
 	    return response()->json([
                         'token' => $token[0],
-                        'user' => $data
+                        'user' => $token[1]
                     ],200);
 	}
 
@@ -36,7 +35,7 @@ class ApiAuthController extends Controller
 	    if ($user) {
 	        if (Hash::check($request->password, $user->password)) {
 	            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-	            $data =   $this->register->getUserData($request->email);
+	            $data =   $this->register->getUserData($request->email,$request->type);
 	             return response()->json([
                         'token' => $token[0],
                         'user' => $data,

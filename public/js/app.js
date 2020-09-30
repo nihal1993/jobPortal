@@ -14538,9 +14538,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_LoginCompanyDashboard__ = __webpack_require__(271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_LoginCandidate__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Dashboard__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Job__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_DashboardStudent__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Job__ = __webpack_require__(257);
 
 __webpack_require__(109);
+
 
 
 
@@ -14567,8 +14569,11 @@ function App() {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/Dashboard', render: function render(props) {
                     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__components_Dashboard__["a" /* default */], props);
                 } }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/DashboardStudent', render: function render(props) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_DashboardStudent__["a" /* default */], props);
+                } }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Route */], { path: '/Job', render: function render(props) {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Job__["a" /* default */], props);
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__components_Job__["a" /* default */], props);
                 } })
         )
     );
@@ -63293,7 +63298,7 @@ var RegisterCandidateForm = function (_Component) {
 
 																																																																																											if (!values.skills) {
 																																																																																																								errors.skills = 'skills is required';
-																																																																																											} else if (!/^[a-z\d]+(?:\,[a-z\d]+)+$/i.test(values.location)) {
+																																																																																											} else if (!/^([a-z].)+,/i.test(values.skills)) {
 																																																																																																								errors.skills = 'location should be c++,python,java';
 																																																																																											}
 
@@ -63325,7 +63330,7 @@ var RegisterCandidateForm = function (_Component) {
 																																																																																																								}).then(function (response) {
 																																																																																																																					return response.json();
 																																																																																																								}).then(function (data) {
-																																																																																																																					//Fetched product is stored in the state
+																																																																																																																					console.log(data);
 																																																																																																																					localStorage.setItem('itemName', data.token);
 																																																																																																																					_this2.setState({ userData: data.user });
 																																																																																																																					_this2.setState({ status: true });
@@ -63355,11 +63360,11 @@ var RegisterCandidateForm = function (_Component) {
 																																																																																																																					__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 																																																																																																																																		'label',
 																																																																																																																																		{ 'for': 'Name' },
-																																																																																																																																		'Company Name'
+																																																																																																																																		'Name'
 																																																																																																																					)
 																																																																																																								),
 																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', onChange: handleChange,
-																																																																																																																					onBlur: handleBlur, name: 'name', className: 'form-control form-control-lg', placeholder: 'Enter Company Name ' }),
+																																																																																																																					onBlur: handleBlur, name: 'name', className: 'form-control form-control-lg', placeholder: 'Enter Name ' }),
 																																																																																																								__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
 																																																																																																																					'div',
 																																																																																																																					{ 'class': 'invalid-feedback' },
@@ -63587,6 +63592,7 @@ var LoginCompany = function (_Component) {
 
               setTimeout(function () {
                 _this2.setState({ status: false });
+                values.type = 'company';
                 fetch(window.location.origin + "/api/login", {
                   method: 'POST',
                   headers: {
@@ -64038,7 +64044,104 @@ var Dashboard = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Dashboard);
 
 /***/ }),
-/* 256 */,
+/* 256 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Navbar__ = __webpack_require__(106);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+/* An example React component */
+
+var DashboardStudent = function (_Component) {
+    _inherits(DashboardStudent, _Component);
+
+    function DashboardStudent(props) {
+        _classCallCheck(this, DashboardStudent);
+
+        var _this = _possibleConstructorReturn(this, (DashboardStudent.__proto__ || Object.getPrototypeOf(DashboardStudent)).call(this, props));
+
+        console.log(_this.props.location); //undefined
+        return _this;
+    }
+
+    _createClass(DashboardStudent, [{
+        key: 'render',
+        value: function render() {
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Navbar__["a" /* default */], null),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'slider-area ' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'slider-active' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'single-slider slider-height d-flex align-items-center' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'container' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'row' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xl-6 col-lg-9 col-md-10' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'hero__caption' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'h1',
+                                                null,
+                                                'Find the most exciting jobs',
+                                                this.props.location.state.userdata.name
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xl-6 col-lg-9 col-md-10' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'hero__caption' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '/img/blog/home-blog1.jpg', alt: '' })
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DashboardStudent;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (DashboardStudent);
+
+/***/ }),
 /* 257 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

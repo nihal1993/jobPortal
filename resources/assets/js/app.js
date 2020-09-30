@@ -9,6 +9,7 @@ import Candidate from './components/Candidate';
 import LoginCompanyDashboard from './components/LoginCompanyDashboard';
 import LoginCandidate from './components/LoginCandidate';
 import Dashboard from './components/Dashboard';
+import DashboardStudent from './components/DashboardStudent';
 import Job from './components/Job';
 
 
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/LoginCompany" component={LoginCompanyDashboard} exact />
                 <Route path="/LoginCandidate" component={LoginCandidate} exact />
                 <Route path="/Dashboard"   render={(props) => <Dashboard {...props}/>} />
+                <Route path="/DashboardStudent"   render={(props) => <DashboardStudent {...props}/>} />
                 <Route path="/Job"   render={(props) => <Job {...props}/>} />
                 
                 

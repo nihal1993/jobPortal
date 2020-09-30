@@ -58,7 +58,7 @@ import  { Redirect } from 'react-router-dom'
 	         if (!values.skills) {
 	           errors.skills = 'skills is required';
 	         } else if (
-	           !/^[a-z\d]+(?:\,[a-z\d]+)+$/i.test(values.location)
+	           !/^([a-z].)+,/i.test(values.skills)
 	         ) {
 	           errors.skills = 'location should be c++,python,java';
 	         }
@@ -94,7 +94,7 @@ import  { Redirect } from 'react-router-dom'
             return response.json();
 		        })
 		        .then(data => {
-		            //Fetched product is stored in the state
+		            console.log(data);
 		            localStorage.setItem('itemName', data.token);
 		            this.setState({ userData: data.user });
 		            this.setState({ status: true});
@@ -120,9 +120,9 @@ import  { Redirect } from 'react-router-dom'
 	        
 	         <form onSubmit={handleSubmit} >
 	          <div className="form-group ">
-	            <h4><label for="Name">Company Name</label></h4>
+	            <h4><label for="Name">Name</label></h4>
 	            <input type="text"  onChange={handleChange}
-	             onBlur={handleBlur} name="name" className="form-control form-control-lg"  placeholder="Enter Company Name " />
+	             onBlur={handleBlur} name="name" className="form-control form-control-lg"  placeholder="Enter Name " />
 	             <div class="invalid-feedback">
               {errors.name && touched.name && errors.name}
 	            </div>

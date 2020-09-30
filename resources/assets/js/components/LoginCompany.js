@@ -59,6 +59,7 @@
          onSubmit={(values, { setSubmitting }) => {
            setTimeout(() => {
               this.setState({ status: false});
+              values.type='company';
       fetch(window.location.origin+"/api/login" , {
           method: 'POST',
           headers: {
